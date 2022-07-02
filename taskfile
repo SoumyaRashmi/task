@@ -1,0 +1,36 @@
+import pandas as pd
+import pyodbc
+
+conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=interview;'
+                      'Database=interview;'
+                      'Trusted_Connection=yes;')
+cursor = conn.cursor()
+
+cursor.execute('''
+create table employee (id int,firstname varchar(10),middlename varchar(10),lastname varchar(10),location varchar(10),deptno int,
+deptname varchar(10),created_time time, updated_time time, created_date date, updated_date date);
+			)
+               ''')
+cursor.execute('''create table project(id int,projectname varchar(10),projectdesc varchar(20),projectid int,empid int,clientname varchar(10),
+status varchar(10),location varchar(10),created_date date,updated_date date, created_time time, updated_time time);
+			)
+               ''')
+
+df_filtered = df.loc[df['created_time'].dt.minute.eq(0)]
+print(df_filtered)
+
+from apscheduler.schedulers.blocking import BlockingScheduler
+
+def some_job():
+print "created_time"
+
+scheduler = BlockingScheduler()
+scheduler.add_job(created_time, 'interval', hours=1)
+scheduler.start()
+
+import pandas as pd
+query = pd.read_sql_query("select * from employee")
+query2=pd.read_sql_query("select * from project")
+query.tocsv(r'E:\output\employee.csv',index=False)
+query2.tocsv(r'E:\output\project.csv',index=False)
